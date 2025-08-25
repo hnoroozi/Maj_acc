@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Majelani Accounting — Modern Finance OS</title>
+  <meta name="description" content="Ultra-modern, fast, secure finance & business tools for everyone." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <meta property="og:title" content="Majelani Accounting — Modern Finance OS">
+  <meta property="og:description" content="Run billing, tax, reporting, and analytics in one place—fast, secure, and future‑ready.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/static/img/og-cover.png">
+  <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'] },
+          colors: {
+            brand: { 50:'#effaff',100:'#d8f2ff',200:'#b9e8ff',300:'#7ed7ff',400:'#38c1ff',500:'#06b6d4',600:'#0ea5e9',700:'#0284c7',800:'#0369a1',900:'#0b4a6f' }
+          },
+          boxShadow: { glow: '0 0 40px rgba(56,193,255,.25)' },
+          backgroundImage: {
+            mesh: 'radial-gradient(1000px 600px at 10% 10%, rgba(56,193,255,.10), transparent 60%), radial-gradient(800px 800px at 90% 20%, rgba(6,182,212,.12), transparent 60%), radial-gradient(1000px 800px at 50% 90%, rgba(2,132,199,.10), transparent 60%)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { font-feature-settings:'cv02','cv03','cv04','cv11'; }
+    .glass { backdrop-filter: blur(10px); background: color-mix(in srgb, white 70%, transparent); }
+    .glass-dark { backdrop-filter: blur(10px); background: color-mix(in srgb, #0b1220 70%, transparent); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.75rem 1.25rem; font-weight:600; font-size:.875rem; transition:all .2s; box-shadow:0 1px 2px rgba(0,0,0,.05); }
+    .btn-primary { background:#0ea5e9; color:#fff; } .btn-primary:hover{ background:#0284c7; }
+    .btn-ghost { background:transparent; color:#374151; } .btn-ghost:hover{ background:#f3f4f6; }
+    .dark .btn-ghost{ color:#e5e7eb; } .dark .btn-ghost:hover{ background:rgba(255,255,255,.06); }
+    .fade-up { opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease; }
+    .fade-up.reveal { opacity:1; transform:translateY(0); }
+  </style>
+
+  {% block head %}{% endblock %}
+</head>
+<body class="bg-white text-gray-900 dark:bg-[#0b1220] dark:text-gray-100 antialiased">
+
+  <!-- Header -->
+  <header class="fixed inset-x-0 top-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <nav class="mt-4 flex items-center justify-between rounded-2xl border border-black/5 bg-white/70 p-2 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5">
+        <a href="/" class="flex items-center gap-2 rounded-xl px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
+          <img src="/static/img/logo.svg" class="h-6 w-6" alt="Majelani" />
+          <span class="text-sm font-bold tracking-tight">Majelani Accounting</span>
+        </a>
+        <div class="hidden items-center gap-1 md:flex">
+          <a href="#features" class="rounded-xl px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/5">Features</a>
+          <a href="#pricing" class="rounded-xl px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/5">Pricing</a>
+          <a href="#faq" class="rounded-xl px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/5">FAQ</a>
+          <a href="#contact" class="rounded-xl px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-white/5">Contact</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <!-- theme toggle -->
+          <button id="themeToggle" aria-label="Toggle theme" class="btn-ghost rounded-xl px-3 py-2">
+            <svg id="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5"><path fill="currentColor" d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12m0 4a1 1 0 0 1-1-1v-1a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1m0-18a1 1 0 0 1-1-1V2a1 1 0 1 1 2 0v1a1 1 0 0 1-1 1m10 7h-1a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2M3 12H2a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2"/></svg>
+            <svg id="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hidden h-5 w-5"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79"/></svg>
+          </button>
+          <a href="{{ url_for('public_bp.signin') }}" class="btn btn-ghost hidden md:inline-flex">Sign in</a>
+          <a href="{{ url_for('public_bp.signup') }}" class="btn btn-primary">Get Started</a>
+          <button id="menuBtn" class="md:hidden rounded-xl p-2 hover:bg-gray-100 dark:hover:bg-white/5" aria-label="Open menu">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- mobile menu -->
+      <div id="mobileMenu" class="glass dark:glass-dark pointer-events-none invisible mt-2 rounded-2xl border border-black/5 p-3 opacity-0 transition-all dark:border-white/10 md:hidden">
+        <a href="#features" class="block rounded-xl px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/5">Features</a>
+        <a href="#pricing" class="block rounded-xl px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/5">Pricing</a>
+        <a href="#faq" class="block rounded-xl px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/5">FAQ</a>
+        <a href="#contact" class="block rounded-xl px-3 py-2 hover:bg-gray-100 dark:hover:bg-white/5">Contact</a>
+        <div class="mt-2 flex items-center gap-2">
+          <a href="{{ url_for('public_bp.signin') }}" class="btn btn-ghost w-full">Sign in</a>
+          <a href="{{ url_for('public_bp.signup') }}" class="btn btn-primary w-full">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-28">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="mt-24 border-t border-black/5 bg-white/60 backdrop-blur dark:border-white/10 dark:bg-white/5">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div class="grid gap-10 md:grid-cols-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <img src="/static/img/logo.svg" class="h-6 w-6" alt="Logo" />
+            <span class="font-bold">Majelani Accounting</span>
+          </div>
+          <p class="mt-4 text-sm text-gray-600 dark:text-gray-300">Modern finance tools for individuals and businesses. Secure. Fast. Future-ready.</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold">Product</h4>
+          <ul class="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+            <li><a href="#features" class="hover:underline">Features</a></li>
+            <li><a href="#pricing" class="hover:underline">Pricing</a></li>
+            <li><a href="#faq" class="hover:underline">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold">Company</h4>
+          <ul class="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+            <li><a href="#" class="hover:underline">About</a></li>
+            <li><a href="#" class="hover:underline">Blog</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold">Legal</h4>
+          <ul class="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-300">
+            <li><a href="#" class="hover:underline">Privacy</a></li>
+            <li><a href="#" class="hover:underline">Terms</a></li>
+            <li><a href="#" class="hover:underline">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-6 text-xs text-gray-500 dark:border-white/10 md:flex-row">
+        <span>© <span id="year"></span> Majelani — All rights reserved.</span>
+        <span class="inline-flex items-center gap-2">
+          <span class="rounded-md border px-2 py-0.5 text-[11px]">v1 • Public Homepage</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme (persist)
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const setTheme = (mode) => {
+      if (mode === 'dark') {
+        root.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0b1220');
+        document.getElementById('sun').classList.add('hidden');
+        document.getElementById('moon').classList.remove('hidden');
+      } else {
+        root.classList.remove('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0ea5e9');
+        document.getElementById('sun').classList.remove('hidden');
+        document.getElementById('moon').classList.add('hidden');
+      }
+      localStorage.setItem('theme', mode);
+    };
+    setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const next = root.classList.contains('dark') ? 'light' : 'dark';
+      setTheme(next);
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('opacity-100');
+      mobileMenu.classList.toggle('opacity-0');
+      mobileMenu.classList.toggle('invisible');
+      mobileMenu.classList.toggle('pointer-events-none');
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting && e.target.classList.add('reveal'));
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
