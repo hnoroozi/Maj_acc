@@ -1,0 +1,26 @@
+{% extends 'layouts/public_base.html' %}
+{% block content %}
+<section class="py-16">
+  <div class="mx-auto max-w-md px-4">
+    <h1 class="text-2xl font-extrabold">Sign in</h1>
+    <p class="mt-2 text-sm text-gray-600">Welcome back. Please enter your details.</p>
+
+    <form method="post" action="{{ url_for('public_bp.signin_post') }}" class="mt-6 space-y-4">
+      <div>
+        <label class="block text-sm font-medium">Email</label>
+        <input name="email" type="email" required class="mt-1 w-full rounded-xl border px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Password</label>
+        <input name="password" type="password" required class="mt-1 w-full rounded-xl border px-3 py-2">
+      </div>
+      <button class="btn btn-primary w-full" type="submit">Sign in</button>
+    </form>
+
+    <p class="mt-4 text-sm text-gray-600">
+      Don’t have an account?
+      <a class="text-blue-600 hover:underline" href="{{ url_for('public_bp.signup') }}">Create one</a>.
+    </p>
+  </div>
+</section>
+{% endblock %}

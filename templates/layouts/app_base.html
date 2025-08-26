@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Majelani — App</title>
+  <meta name="theme-color" content="#0ea5e9" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: {600:'#0ea5e9',700:'#0284c7'} },
+          boxShadow: { glow: '0 0 40px rgba(56,193,255,.25)' }
+        }
+      }
+    }
+  </script>
+  <style>
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:1rem;padding:.65rem 1.1rem;font-weight:600;font-size:.875rem;transition:all .2s;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+    .btn-primary{background:#0ea5e9;color:#fff}.btn-primary:hover{background:#0284c7}
+    .nav-link{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;border-radius:.75rem}
+    .nav-link:hover{background:rgba(2,132,199,.08)}
+    .active{background:rgba(2,132,199,.12)}
+  </style>
+  {% block head %}{% endblock %}
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+  <div class="min-h-screen">
+    <!-- Topbar -->
+    <header class="sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <a href="/" class="font-bold">Majelani</a>
+        <div class="flex items-center gap-2">
+          <a href="/app/dashboard" class="btn">Dashboard</a>
+          <a href="{{ url_for('app_bp.logout') }}" class="btn btn-primary">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 grid gap-6 md:grid-cols-[220px_1fr]">
+      <!-- Sidebar -->
+      <aside class="md:sticky md:top-20 h-max">
+        <nav class="space-y-1">
+          <a class="nav-link active" href="{{ url_for('app_bp.dashboard') }}">
+            <span>📊</span><span>Overview</span>
+          </a>
+          <a class="nav-link" href="#">
+            <span>🧾</span><span>Invoices</span>
+          </a>
+          <a class="nav-link" href="#">
+            <span>💹</span><span>Reports</span>
+          </a>
+          <a class="nav-link" href="#">
+            <span>⚙️</span><span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main -->
+      <main>
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
